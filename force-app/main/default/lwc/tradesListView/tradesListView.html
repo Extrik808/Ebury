@@ -1,0 +1,16 @@
+<template>
+    <lightning-spinner if:true={showSpinner} variant="brand" size="medium"></lightning-spinner>
+
+    <div class="new-trade-container slds-p-bottom_medium">
+        <c-create-trade></c-create-trade>
+    </div>
+
+    <div if:true={tradesData}>
+        <lightning-datatable
+            data={tradesData}
+            columns={columns}
+            key-field="Id"
+            hide-checkbox-column>
+        </lightning-datatable>
+    </div>
+</template>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>sell_CCY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sell CCY</shortDescription>
+        <value>Sell CCY</value>
+    </labels>
+    <labels>
+        <fullName>sell_Amount</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>sell Amount</shortDescription>
+        <value>Sell Amount</value>
+    </labels>
+    <labels>
+        <fullName>buy_CCY</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>buy CCY</shortDescription>
+        <value>Buy CCY</value>
+    </labels>
+    <labels>
+        <fullName>buy_Amount</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>buy Amount</shortDescription>
+        <value>Buy Amount</value>
+    </labels>
+    <labels>
+        <fullName>rate</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>rate</shortDescription>
+        <value>Rate</value>
+    </labels>
+    <labels>
+        <fullName>date_Booked</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>date Booked</shortDescription>
+        <value>Date Booked</value>
+    </labels>
+    <labels>
+        <fullName>error</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>error</shortDescription>
+        <value>Error</value>
+    </labels>
+    <labels>
+        <fullName>warning</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>warning</shortDescription>
+        <value>Warning</value>
+    </labels>
+    <labels>
+        <fullName>success</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>success</shortDescription>
+        <value>Success</value>
+    </labels>
+    <labels>
+        <fullName>new_Trade</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>newTrade</shortDescription>
+        <value>New Trade</value>
+    </labels>
+    <labels>
+        <fullName>create</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>create</shortDescription>
+        <value>Create</value>
+    </labels>
+    <labels>
+        <fullName>cancel</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>rate</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>rate</shortDescription>
+        <value>Rate</value>
+    </labels>
+    <labels>
+        <fullName>buy_Amount</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>buy Amount</shortDescription>
+        <value>Buy Amount</value>
+    </labels>
+</CustomLabels>

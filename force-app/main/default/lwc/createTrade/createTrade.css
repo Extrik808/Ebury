@@ -1,0 +1,22 @@
+.row {
+    width: 100%;
+    display: flex;
+    align-items: baseline;
+}
+
+.rate-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rate-content {
+    display: flex;
+    align-items: center;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
