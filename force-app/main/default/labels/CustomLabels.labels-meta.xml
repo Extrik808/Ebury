@@ -111,6 +111,7 @@
             Buy Amount: {3}
             Rate: {4}
             Booked Date: {5}
+            Link to the trade: {6}
         </value>
     </labels>
 </CustomLabels>

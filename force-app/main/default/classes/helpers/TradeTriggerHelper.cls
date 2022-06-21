@@ -56,7 +56,8 @@ public with sharing class TradeTriggerHelper {
             trade.Buy_Currency__c,
             String.valueOf(trade.Buy_Amount__c),
             String.valueOf(trade.Rate__c),
-            trade.Date_Booked__c != null ? trade.Date_Booked__c.format() + '\n' : null + '\n'
+            trade.Date_Booked__c != null ? trade.Date_Booked__c.format() : null,
+            URL.getSalesforceBaseUrl().toExternalForm() + '/' + trade.Id + '\n'
         };
 
         return String.format(Label.chatter_Notification_Message, params);
