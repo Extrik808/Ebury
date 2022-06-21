@@ -98,4 +98,19 @@
         <shortDescription>buy Amount</shortDescription>
         <value>Buy Amount</value>
     </labels>
+    <labels>
+        <fullName>chatter_Notification_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>chatter Notification Message</shortDescription>
+        <value>A new trade has been created with the following data:
+            Sell Currency: {0}
+            Sell Amount: {1}
+            Buy Currency: {2}
+            Buy Amount: {3}
+            Rate: {4}
+            Booked Date: {5}
+        </value>
+    </labels>
 </CustomLabels>
