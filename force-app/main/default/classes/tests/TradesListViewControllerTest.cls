@@ -20,18 +20,6 @@ private class TradesListViewControllerTest {
     }
 
     @isTest
-    private static void getTradeListWithoutChatterRecipientsNegative() {
-        try {
-            createChatterSetting();
-            createTrades(5);
-            List<Trade__c> tradeList = TradesListViewController.getTradeList();
-            System.assertEquals(tradeList.size(), 0, 'Trade List is not empty');
-        } catch (Exception ex) {
-            System.assert(ex.getMessage().contains('Cannot create Chatter post: Empty recipients.'));
-        }
-    }
-
-    @isTest
     private static void getTradeListPositive() {
         try {
             createChatterSetting();
