@@ -5,7 +5,9 @@ public with sharing class CreateTradeController {
         try {
             return new FixerIO().getLatestRate(fromCurrency, toCurrency);
         } catch (CustomException ex) {
-            throw new AuraHandledException(ex.getMessage());
+            AuraHandledException e = new AuraHandledException(ex.getMessage());
+            e.setMessage(ex.getMessage());
+            throw e;
         }
     }
 

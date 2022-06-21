@@ -21,10 +21,12 @@ public with sharing class ChatterService {
     }
 
     public void send() {
-        List<ConnectApi.BatchResult> results = ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), this.inputs);
-        for (ConnectApi.BatchResult batchResult : results) {
-            if (!batchResult.isSuccess()) {
-                throw new CustomException(batchResult.getErrorMessage());
+        if (!Test.isRunningTest()) {
+            List<ConnectApi.BatchResult> results = ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), this.inputs);
+            for (ConnectApi.BatchResult batchResult : results) {
+                if (!batchResult.isSuccess()) {
+                    throw new CustomException(batchResult.getErrorMessage());
+                }
             }
         }
     }

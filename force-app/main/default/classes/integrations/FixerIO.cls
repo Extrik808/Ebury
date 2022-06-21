@@ -17,7 +17,6 @@ public with sharing class FixerIO {
             throw new CustomException('Set up a custom Fixer IO setting.');
         }
 
-        System.debug(fixerSetting);
         String url = fixerSetting.Endpoint__c + String.format(path, new List<String>{ toCurrency, fromCurrency });
         HttpRequest request = new HttpRequest();
         request.setEndpoint(url);

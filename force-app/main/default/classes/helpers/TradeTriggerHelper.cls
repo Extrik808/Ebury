@@ -26,7 +26,7 @@ public with sharing class TradeTriggerHelper {
     }
 
     private Id getQueueByName(String name) {
-        return [SELECT Id FROM Group WHERE Type = :QUEUE AND Name = :name].Id;
+        return [SELECT Id FROM Group WHERE Type = :QUEUE AND Name = :name LIMIT 1].Id;
     }
 
     private Set<Id> getQueueMemberIds() {
