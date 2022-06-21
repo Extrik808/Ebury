@@ -7,9 +7,8 @@ public with sharing class TradeTriggerHelper {
     }
 
     private void createChatterPosts() {
-        Set<Id> queueMemberIds = this.getQueueMemberIds();
-
         try {
+            Set<Id> queueMemberIds = this.getQueueMemberIds();
             ChatterService chatter = new ChatterService();
 
             for (Trade__c trade: (List<Trade__c>) Trigger.new) {
@@ -36,6 +35,10 @@ public with sharing class TradeTriggerHelper {
         try {
             String queueName = this.getQueueName();
 
+            if (String.isBlank(queueName)) {
+                throw new CustomException('Fill in the name of the queue in the custom Chatter Setting.');
+            }
+
             for (GroupMember member : [SELECT UserOrGroupId FROM GroupMember WHERE GroupId = :this.getQueueByName(queueName)]) {
                 result.add(member.UserOrGroupId);
             }
@@ -53,7 +56,7 @@ public with sharing class TradeTriggerHelper {
             trade.Buy_Currency__c,
             String.valueOf(trade.Buy_Amount__c),
             String.valueOf(trade.Rate__c),
-            trade.Date_Booked__c.format() + '\n'
+            trade.Date_Booked__c != null ? trade.Date_Booked__c.format() + '\n' : null + '\n'
         };
 
         return String.format(Label.chatter_Notification_Message, params);

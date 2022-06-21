@@ -94,16 +94,18 @@ export default class CreateTrade extends LightningElement {
         let buyCurrency = this.template.querySelector('[data-id="buyCurrency"]').value;
         let sellAmount = this.template.querySelector('[data-id="sellAmount"]').value;
 
-        if (sellCurrency && buyCurrency && sellAmount) {
+        if (sellCurrency && buyCurrency && sellAmount && this.rate !== 'X') {
             this.buyAmount = Number(sellAmount * this.rate).toFixed(2);
         }
     }
 
     createTrade(e) {
         e.preventDefault();
+        let sellAmount = this.template.querySelector('[data-id="sellAmount"]').value;
+        if (!sellAmount) return;
+
         this.showSpinner = true;
         const fields = e.detail.fields;
-        let sellAmount = this.template.querySelector('[data-id="sellAmount"]').value;
         fields.Rate__c = this.rate === 'X' ? 0 : this.rate;
         fields.Date_Booked__c = this.dateBooked ? new Date(this.dateBooked).toISOString() : null;
         fields.Sell_Amount__c = sellAmount ? sellAmount : 0;

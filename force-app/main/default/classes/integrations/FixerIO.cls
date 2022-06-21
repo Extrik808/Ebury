@@ -13,6 +13,11 @@ public with sharing class FixerIO {
             throw new CustomException('Attempt to send bad parameters to Fixer.io.');
         }
 
+        if (String.isBlank(fixerSetting.Endpoint__c) || String.isBlank(fixerSetting.Token__c)) {
+            throw new CustomException('Set up a custom Fixer IO setting.');
+        }
+
+        System.debug(fixerSetting);
         String url = fixerSetting.Endpoint__c + String.format(path, new List<String>{ toCurrency, fromCurrency });
         HttpRequest request = new HttpRequest();
         request.setEndpoint(url);

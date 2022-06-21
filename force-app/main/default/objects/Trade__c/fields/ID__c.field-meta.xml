@@ -4,6 +4,7 @@
     <displayFormat>TR{0000000}</displayFormat>
     <externalId>false</externalId>
     <label>ID</label>
+    <trackHistory>false</trackHistory>
     <trackTrending>false</trackTrending>
     <type>AutoNumber</type>
 </CustomField>
