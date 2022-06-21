@@ -1,24 +1,52 @@
 public with sharing class TradeTriggerHelper {
 
     private static final String QUEUE = 'Queue';
+    private List<ConnectApi.BatchInput> batchInputs = new List<ConnectApi.BatchInput>();
 
     public void handleAfterInsert() {
-        this.createChatterPosts();
+        this.sendChatterMessages();
     }
 
-    private void createChatterPosts() {
+    private void sendChatterMessages() {
         try {
             Set<Id> queueMemberIds = this.getQueueMemberIds();
-            ChatterService chatter = new ChatterService();
-
-            for (Trade__c trade: (List<Trade__c>) Trigger.new) {
-                chatter.createPost(queueMemberIds, this.generatePostMessage(trade), trade.Id);
+            if (queueMemberIds.isEmpty()) {
+                throw new CustomException('Empty recipients.');
             }
 
-            chatter.send();
-        } catch(CustomException exc) {
-            Trigger.new[0].addError('Cannot create Chatter post: ' + exc.getMessage());
+            for (Trade__c trade : (List<Trade__c>) Trigger.new) {
+                ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
+
+                feedItemInput.body = this.generateBody(queueMemberIds, this.generatePostMessage(trade));
+                feedItemInput.feedElementType = ConnectApi.FeedElementType.FeedItem;
+                feedItemInput.subjectId = trade.Id;
+
+                batchInputs.add(new ConnectApi.BatchInput(feedItemInput));
+            }
+
+            if (!Test.isRunningTest()) {
+                ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), batchInputs);
+            }
+        } catch (CustomException ex) {
+            Trigger.new[0].addError('Cannot create Chatter post: ' + ex.getMessage());
         }
+    }
+
+    private ConnectApi.MessageBodyInput generateBody(Set<Id> recipients, String message) {
+        ConnectApi.MessageBodyInput messageBody = new ConnectApi.MessageBodyInput();
+        messageBody.messageSegments = new List<ConnectApi.MessageSegmentInput>();
+
+        ConnectApi.TextSegmentInput textSegment = new ConnectApi.TextSegmentInput();
+        textSegment.text = message;
+        messageBody.messageSegments.add(textSegment);
+
+        for (Id userId : recipients) {
+            ConnectApi.MentionSegmentInput mentionSegmentInput = new ConnectApi.MentionSegmentInput();
+            mentionSegmentInput.Id = userId;
+            messageBody.messageSegments.add(mentionSegmentInput);
+        }
+
+        return messageBody;
     }
 
     private String getQueueName() {

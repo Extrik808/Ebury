@@ -1,4 +1,4 @@
-import {LightningElement} from 'lwc';
+import {api, LightningElement} from 'lwc';
 import getLatestRate from '@salesforce/apex/CreateTradeController.getLatestRate';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { TOAST_VARIANT, TOAST_TITLE } from 'c/constants'
@@ -24,9 +24,16 @@ export default class CreateTrade extends LightningElement {
     dateBooked;
     buyAmount = 0;
     showSpinner = true;
+    _showModal = false;
 
-    get modalWindow() {
-        return this.template.querySelector('c-modal-window');
+    @api
+    showModal() {
+        this._showModal = true;
+    }
+
+    @api
+    hideModal() {
+        this._showModal = false;
     }
 
     handleClick(e) {
@@ -59,11 +66,11 @@ export default class CreateTrade extends LightningElement {
     }
 
     showModalWindow() {
-        this.modalWindow.showModal();
+        this.showModal();
     }
 
     hideModalWindow() {
-        this.modalWindow.hideModal();
+        this.hideModal();
         this.reset();
     }
 

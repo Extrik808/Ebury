@@ -5,84 +5,99 @@
         onclick={handleClick}>
     </lightning-button>
 
-    <c-modal-window hide-close-button="true" hide-footer="true">
-        <span slot="title">{LABELS.newTradeLabel}</span>
+    <template if:true={_showModal}>
+        <section
+            class="slds-modal slds-fade-in-open"
+            role="dialog"
+            tabindex="-1">
 
-        <lightning-spinner if:true={showSpinner} slot="spinner" variant="brand" size="medium"></lightning-spinner>
+            <div class="slds-modal__container">
+                <div class="slds-is-relative">
+                    <lightning-spinner if:true={showSpinner} slot="spinner" variant="brand" size="medium"></lightning-spinner>
 
-        <div class="slds-p-horizontal_medium slds-p-vertical_small" slot="content">
-            <lightning-record-edit-form
-                object-api-name="Trade__c"
-                onload={handleOnload}
-                onsubmit={createTrade}
-                onerror={handleError}
-                onsuccess={handleSuccess}>
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium">
+                            <span>{LABELS.newTradeLabel}</span>
+                        </h2>
+                    </header>
 
-                <div class="row">
-                    <lightning-input-field
-                        class="slds-size_1-of-3"
-                        field-name="Sell_Currency__c"
-                        data-id="sellCurrency"
-                        data-action="getRate"
-                        onchange={handleChange}>
-                    </lightning-input-field>
+                    <div class="slds-modal__content slds-p-horizontal_medium slds-p-vertical_small">
+                        <lightning-record-edit-form
+                            object-api-name="Trade__c"
+                            onload={handleOnload}
+                            onsubmit={createTrade}
+                            onerror={handleError}
+                            onsuccess={handleSuccess}>
+
+                            <div class="row">
+                                <lightning-input-field
+                                    class="slds-size_1-of-3"
+                                    field-name="Sell_Currency__c"
+                                    data-id="sellCurrency"
+                                    data-action="getRate"
+                                    onchange={handleChange}>
+                                </lightning-input-field>
 
 
-                    <div class="rate-container slds-size_1-of-3">
-                        <label>{LABELS.rateLabel}</label>
+                                <div class="rate-container slds-size_1-of-3">
+                                    <label>{LABELS.rateLabel}</label>
 
-                        <div class="rate-content slds-p-horizontal_medium">
-                            <lightning-icon icon-name="utility:play" size="small"></lightning-icon>
-                            <span class="slds-p-horizontal_medium">{rate}</span>
-                            <lightning-icon icon-name="utility:play" size="small"></lightning-icon>
-                        </div>
+                                    <div class="rate-content slds-p-horizontal_medium">
+                                        <lightning-icon icon-name="utility:play" size="small"></lightning-icon>
+                                        <span class="slds-p-horizontal_medium">{rate}</span>
+                                        <lightning-icon icon-name="utility:play" size="small"></lightning-icon>
+                                    </div>
+                                </div>
+
+                                <lightning-input-field
+                                    class="slds-size_1-of-3"
+                                    field-name="Buy_Currency__c"
+                                    data-id="buyCurrency"
+                                    data-action="getRate"
+                                    onchange={handleChange}>
+                                </lightning-input-field>
+                            </div>
+
+                            <div class="row">
+                                <lightning-input-field
+                                    class="slds-size_1-of-3"
+                                    field-name="Sell_Amount__c"
+                                    data-id="sellAmount"
+                                    data-action="updateSellAmount"
+                                    onchange={handleChange}>
+                                </lightning-input-field>
+
+                                <div class="slds-size_1-of-3"></div>
+                                <div class="slds-size_1-of-3">
+                                    <lightning-input
+                                        type="number"
+                                        label={LABELS.buyAmountLabel}
+                                        disabled="true"
+                                        value={buyAmount}>
+                                    </lightning-input>
+                                </div>
+                            </div>
+
+                            <div class="footer-container slds-p-top_large slds-p-bottom_medium">
+                                <lightning-button
+                                    data-action="create"
+                                    label={LABELS.createLabel}
+                                    variant="brand"
+                                    type="submit"
+                                    onclick={handleClick}>
+                                </lightning-button>
+
+                                <lightning-button
+                                    data-action="cancel"
+                                    label={LABELS.cancelLabel}
+                                    onclick={handleClick}>
+                                </lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
                     </div>
-
-                    <lightning-input-field
-                        class="slds-size_1-of-3"
-                        field-name="Buy_Currency__c"
-                        data-id="buyCurrency"
-                        data-action="getRate"
-                        onchange={handleChange}>
-                    </lightning-input-field>
                 </div>
-
-                <div class="row">
-                    <lightning-input-field
-                        class="slds-size_1-of-3"
-                        field-name="Sell_Amount__c"
-                        data-id="sellAmount"
-                        data-action="updateSellAmount"
-                        onchange={handleChange}>
-                    </lightning-input-field>
-
-                    <div class="slds-size_1-of-3"></div>
-                    <div class="slds-size_1-of-3">
-                        <lightning-input
-                            type="number"
-                            label={LABELS.buyAmountLabel}
-                            disabled="true"
-                            value={buyAmount}>
-                        </lightning-input>
-                    </div>
-                </div>
-
-                <div class="footer-container slds-p-top_large slds-p-bottom_medium">
-                    <lightning-button
-                        data-action="create"
-                        label={LABELS.createLabel}
-                        variant="brand"
-                        type="submit"
-                        onclick={handleClick}>
-                    </lightning-button>
-
-                    <lightning-button
-                        data-action="cancel"
-                        label={LABELS.cancelLabel}
-                        onclick={handleClick}>
-                    </lightning-button>
-                </div>
-            </lightning-record-edit-form>
-        </div>
-    </c-modal-window>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
 </template>
