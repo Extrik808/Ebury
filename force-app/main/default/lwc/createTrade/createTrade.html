@@ -59,13 +59,17 @@
                             </div>
 
                             <div class="row">
-                                <lightning-input-field
+                                <lightning-input
+                                    type="number"
                                     class="slds-size_1-of-3"
-                                    field-name="Sell_Amount__c"
+                                    min="0"
+                                    step="0.01"
+                                    label={LABELS.sellAmountLabel}
                                     data-id="sellAmount"
                                     data-action="updateSellAmount"
+                                    onblur={handleBlur}
                                     onchange={handleChange}>
-                                </lightning-input-field>
+                                </lightning-input>
 
                                 <div class="slds-size_1-of-3"></div>
                                 <div class="slds-size_1-of-3">
@@ -84,6 +88,7 @@
                                     label={LABELS.createLabel}
                                     variant="brand"
                                     type="submit"
+                                    disabled={disabled}
                                     onclick={handleClick}>
                                 </lightning-button>
 

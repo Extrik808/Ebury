@@ -9,14 +9,17 @@ export default [
     {
         label: sellCCYLabel,
         fieldName: 'Sell_Currency__c',
-        type: 'text',
+        type: 'Currency',
         sortable: false
     },
     {
         label: sellAmountLabel,
         fieldName: 'Sell_Amount__c',
-        type: 'Currency',
-        sortable: false
+        type: 'number',
+        sortable: false,
+        typeAttributes: {
+            minimumFractionDigits: '2'
+        }
     },
     {
         label: buyCCYLabel,
@@ -27,14 +30,20 @@ export default [
     {
         label: buyAmountLabel,
         fieldName: 'Buy_Amount__c',
-        type: 'Currency',
-        sortable: false
+        type: 'number',
+        sortable: false,
+        typeAttributes: {
+            minimumFractionDigits: '2'
+        }
     },
     {
         label: rateLabel,
         fieldName: 'Rate__c',
         type: 'number',
-        sortable: false
+        sortable: false,
+        typeAttributes: {
+            minimumFractionDigits: '4'
+        }
     },
     {
         label: dateBookedLabel,

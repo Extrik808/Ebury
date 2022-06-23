@@ -12,12 +12,12 @@ public with sharing class TradeTriggerHelper {
             ChatterService chatter = new ChatterService();
 
             for (Trade__c trade: (List<Trade__c>) Trigger.new) {
-                chatter.createPost(queueMemberIds, this.generatePostMessage(trade), trade.Id);
+                chatter.createPost(queueMemberIds, chatter.generatePostMessage(trade), trade.Id);
             }
 
             chatter.sendPost();
         } catch (CustomException ex) {
-            Trigger.new[0].addError('Cannot create Chatter post: ' + ex.getMessage());
+            Trigger.new[0].addError(Label.chatter_Error_Message + ex.getMessage());
         }
     }
 
@@ -36,31 +36,17 @@ public with sharing class TradeTriggerHelper {
             String queueName = this.getQueueName();
 
             if (String.isBlank(queueName)) {
-                throw new CustomException('Fill in the name of the queue in the custom Chatter Setting.');
+                throw new CustomException(Label.setup_Chatter_Setting_Message);
             }
 
             for (GroupMember member : [SELECT UserOrGroupId FROM GroupMember WHERE GroupId = :this.getQueueByName(queueName)]) {
                 result.add(member.UserOrGroupId);
             }
         } catch (QueryException exc) {
-            Trigger.new[0].addError('We cannot find queue.');
+            Trigger.new[0].addError(Label.not_Find_Queue_Message);
         }
 
         return result;
-    }
-
-    private String generatePostMessage(Trade__c trade) {
-        List<String> params = new List<String>{
-            trade.Sell_Currency__c,
-            String.valueOf(trade.Sell_Amount__c),
-            trade.Buy_Currency__c,
-            String.valueOf(trade.Buy_Amount__c),
-            String.valueOf(trade.Rate__c),
-            trade.Date_Booked__c != null ? trade.Date_Booked__c.format() : null,
-            URL.getSalesforceBaseUrl().toExternalForm() + '/' + trade.Id + '\n'
-        };
-
-        return String.format(Label.chatter_Notification_Message, params);
     }
 
 }

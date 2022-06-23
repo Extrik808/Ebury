@@ -1,5 +1,7 @@
 public with sharing class ChatterService {
 
+    // Used ConnectApi because FeedItem not supported mention
+
     @testVisible
     private List<ConnectApi.BatchInput> batchInputs;
 
@@ -9,7 +11,7 @@ public with sharing class ChatterService {
 
     public void createPost(Set<Id> recipients, String message, Id subjectId) {
         if (recipients.isEmpty()) {
-            throw new CustomException('Empty recipients.');
+            throw new CustomException(Label.empty_Recipients);
         }
 
         ConnectApi.FeedItemInput feedItemInput = new ConnectApi.FeedItemInput();
@@ -20,7 +22,23 @@ public with sharing class ChatterService {
     }
 
     public void sendPost() {
-        ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), this.batchInputs);
+        if (!Test.isRunningTest()) {
+            ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), this.batchInputs);
+        }
+    }
+
+    public String generatePostMessage(Trade__c trade) {
+        List<String> params = new List<String>{
+                trade.Sell_Currency__c,
+                String.valueOf(trade.Sell_Amount__c),
+                trade.Buy_Currency__c,
+                String.valueOf(trade.Buy_Amount__c),
+                String.valueOf(trade.Rate__c),
+                trade.Date_Booked__c != null ? trade.Date_Booked__c.format() : null,
+                URL.getSalesforceBaseUrl().toExternalForm() + '/' + trade.Id + '\n'
+        };
+
+        return String.format(Label.chatter_Notification_Message, params);
     }
 
     private ConnectApi.MessageBodyInput generateBody(Set<Id> recipients, String message) {

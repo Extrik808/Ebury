@@ -7,12 +7,15 @@ Prerequisites:
 <li>Access to Fixer.io account which provide token.</li><br/>
 Steps:<br/>
 1. Run openTest.sh<br/>
-1.1 Authorization on DevHub<br/>
-1.2 Write scratch org name<br/>
-1.3 After executing the script will open your scratch org<br/>
-2. Create Default Organization Level Value in "Chatter Setting" custom setting with the "Queue Name" field filled in with the value "Trade reviewers"
+1.1 Open Terminal and go to the openTest.sh file<br/>
+1.2 chmod 755 openTest.sh<br/>
+1.3 ./openTest.sh<br/>
+1.4 Authorization on DevHub<br/>
+1.5 Write scratch org name<br/>
+1.6 After executing the script will open your scratch org<br/>
+2. Create Default Organization Level Value in "Chatter Setting" custom setting with the "Queue Name" label filled in with the value "Trade reviewers"
 <img src="screenshot/ChatterSetting.png"><br/>
-3. Create Default Organization Level Value in "Fixer IO" custom setting with the "Endpoint" field filled in with the value "https://api.apilayer.com" and "Token" field filled in with the value security token whith provide Fixer IO.
+3. Create Default Organization Level Value in "Fixer IO" custom setting with the "Endpoint" label filled in with the value "https://api.apilayer.com" and "Token" field filled in with the value security token whith provide Fixer IO.
 <img src="screenshot/FixerIO.png"><br/><br/>
 
 <center><strong>Overview</strong></center><br/>

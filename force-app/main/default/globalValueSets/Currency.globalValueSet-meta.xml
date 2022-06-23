@@ -11,9 +11,9 @@
         <label>USD</label>
     </customValue>
     <customValue>
-        <fullName>RUB</fullName>
+        <fullName>CAD</fullName>
         <default>false</default>
-        <label>RUB</label>
+        <label>CAD</label>
     </customValue>
     <masterLabel>Currency</masterLabel>
     <sorted>false</sorted>

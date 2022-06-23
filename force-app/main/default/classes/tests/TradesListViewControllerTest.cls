@@ -15,11 +15,11 @@ private class TradesListViewControllerTest {
             List<Trade__c> tradeList = TradesListViewController.getTradeList();
             System.assertEquals(tradeList.size(), 0, 'Trade List is not empty');
         } catch (Exception ex) {
-            System.assert(ex.getMessage().contains('Cannot create Chatter post: Fill in the name of the queue in the custom Chatter Setting'));
+            System.assert(ex.getMessage().contains(Label.chatter_Error_Message + Label.setup_Chatter_Setting_Message));
         }
     }
 
-    @isTest(SeeAllData=true)
+    @isTest
     private static void getTradeListPositive() {
         try {
             createChatterSetting();

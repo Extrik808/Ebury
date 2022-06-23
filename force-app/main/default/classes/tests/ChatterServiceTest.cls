@@ -12,7 +12,7 @@ private class ChatterServiceTest {
         chatterService.createPost(recipients, message, UserInfo.getUserId());
         Test.stopTest();
 
-        System.assertEquals(1, chatterService.batchInputs.size(), 'Chatter not contain posts');
+        System.assertEquals(1, chatterService.batchInputs.size(), 'Number of posts is 0');
     }
 
     @isTest
@@ -26,9 +26,9 @@ private class ChatterServiceTest {
             chatterService = new ChatterService();
             chatterService.createPost(recipients, message, UserInfo.getUserId());
             Test.stopTest();
-            System.assertEquals(0, chatterService.batchInputs.size(), 'Chatter contain posts');
+            System.assertEquals(0, chatterService.batchInputs.size(), 'Number of posts is 0');
         } catch (Exception ex) {
-            System.assertEquals('Empty recipients.', ex.getMessage());
+            System.assertEquals(Label.empty_Recipients, ex.getMessage());
         }
     }
 }

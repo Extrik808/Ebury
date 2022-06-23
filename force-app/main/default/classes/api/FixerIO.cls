@@ -9,14 +9,16 @@ public with sharing class FixerIO {
     }
 
     public String getLatestRate(String fromCurrency, String toCurrency) {
-        if (String.isBlank(fromCurrency) || String.isBlank(toCurrency)) {
-            throw new CustomException('Attempt to send bad parameters to Fixer.io.');
-        }
-
         if (String.isBlank(fixerSetting.Endpoint__c) || String.isBlank(fixerSetting.Token__c)) {
-            throw new CustomException('Set up a custom Fixer IO setting.');
+            throw new CustomException(Label.fixer_Setting_Blank_Message);
         }
 
+        Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(this.callToFixerIO(fromCurrency, toCurrency));
+
+        return ((Map<String, String>) JSON.deserialize(JSON.serialize(result.get('rates')), Map<String, String>.class)).get(toCurrency);
+    }
+
+    private String callToFixerIO(String fromCurrency, String toCurrency) {
         String url = fixerSetting.Endpoint__c + String.format(path, new List<String>{ toCurrency, fromCurrency });
         HttpRequest request = new HttpRequest();
         request.setEndpoint(url);
@@ -26,12 +28,10 @@ public with sharing class FixerIO {
         HttpResponse response = (new Http()).send(request);
 
         if (response.getStatusCode() != 200) {
-            throw new CustomException('Unable to get response from Fixer.io.');
+            throw new CustomException(Label.fixer_Error_Message);
         }
 
-        Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-
-        return ((Map<String, String>) JSON.deserialize(JSON.serialize(result.get('rates')), Map<String, String>.class)).get(toCurrency);
+        return response.getBody();
     }
 
 }

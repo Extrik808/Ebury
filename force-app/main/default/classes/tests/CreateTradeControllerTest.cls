@@ -31,7 +31,7 @@ private class CreateTradeControllerTest {
             System.assert(String.isBlank(result), 'Rate is not blank');
             Test.stopTest();
         } catch (AuraHandledException ex) {
-            System.assertEquals('Unable to get response from Fixer.io.', ex.getMessage());
+            System.assertEquals(Label.fixer_Error_Message, ex.getMessage());
         }
     }
 

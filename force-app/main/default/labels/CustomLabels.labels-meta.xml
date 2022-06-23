@@ -114,4 +114,76 @@
             Link to the trade: {6}
         </value>
     </labels>
+    <labels>
+        <fullName>fixer_Error_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>fixer Error Message</shortDescription>
+        <value>Unable to get response from Fixer.io.</value>
+    </labels>
+    <labels>
+        <fullName>fixer_Setting_Blank_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>fixer Setting Blank Message</shortDescription>
+        <value>Set up a custom Fixer IO setting.</value>
+    </labels>
+    <labels>
+        <fullName>fixer_Bad_Param_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>fixer Bad Param Message</shortDescription>
+        <value>Attempt to send bad parameters to Fixer.io.</value>
+    </labels>
+    <labels>
+        <fullName>empty_Recipients</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>empty Recipients</shortDescription>
+        <value>Empty recipients.</value>
+    </labels>
+    <labels>
+        <fullName>chatter_Error_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>chatter Error Message</shortDescription>
+        <value>Cannot create Chatter post: </value>
+    </labels>
+    <labels>
+        <fullName>not_Find_Queue_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>not Find Queue Message</shortDescription>
+        <value>We cannot find queue.</value>
+    </labels>
+    <labels>
+        <fullName>setup_Chatter_Setting_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>setup Chatter Setting Message</shortDescription>
+        <value>Fill in the name of the queue in the custom Chatter Setting.</value>
+    </labels>
+    <labels>
+        <fullName>low_Number_Message</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>low Number Message</shortDescription>
+        <value>The number is too low.</value>
+    </labels>
+    <labels>
+        <fullName>sell_Amount</fullName>
+        <categories>Chatter</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>sell_Amount</shortDescription>
+        <value>Sell Amount</value>
+    </labels>
 </CustomLabels>

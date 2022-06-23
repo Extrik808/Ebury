@@ -8,13 +8,17 @@ import createLabel from '@salesforce/label/c.create';
 import cancelLabel from '@salesforce/label/c.cancel';
 import rateLabel from '@salesforce/label/c.rate';
 import buyAmountLabel from '@salesforce/label/c.buy_Amount';
+import sellAmountLabel from '@salesforce/label/c.sell_Amount';
+import lowNumberMessageLabel from '@salesforce/label/c.low_Number_Message';
 
 const LABELS = {
     newTradeLabel: newTradeLabel,
     createLabel: createLabel,
     cancelLabel: cancelLabel,
     rateLabel: rateLabel,
-    buyAmountLabel: buyAmountLabel
+    buyAmountLabel: buyAmountLabel,
+    sellAmountLabel: sellAmountLabel,
+    lowNumberMessageLabel: lowNumberMessageLabel
 }
 
 export default class CreateTrade extends LightningElement {
@@ -36,6 +40,14 @@ export default class CreateTrade extends LightningElement {
         this._showModal = false;
     }
 
+
+    get disabled() {
+        let sellCurrency = this.template.querySelector('[data-id="sellCurrency"]');
+        let buyCurrency = this.template.querySelector('[data-id="buyCurrency"]');
+        let sellAmount = this.template.querySelector('[data-id="sellAmount"]');
+
+        return !(sellCurrency?.value && buyCurrency?.value && sellAmount?.value);
+    }
     handleClick(e) {
         const actionName = e.currentTarget.dataset.action;
 
@@ -60,9 +72,14 @@ export default class CreateTrade extends LightningElement {
                 this.getRate();
                 break;
             case 'updateSellAmount':
+                this.setValidity(e);
                 this.calculateBuyAmount();
                 break;
         }
+    }
+
+    handleBlur(e) {
+        e.currentTarget.reportValidity();
     }
 
     showModalWindow() {
@@ -96,6 +113,18 @@ export default class CreateTrade extends LightningElement {
         }
     }
 
+    setValidity(e) {
+        const currentTarget = e.currentTarget;
+
+        if (currentTarget.value === '-0') {
+            currentTarget.setCustomValidity(this.LABELS.lowNumberMessageLabel);
+        } else {
+            currentTarget.setCustomValidity('');
+        }
+
+        currentTarget.reportValidity();
+    }
+
     calculateBuyAmount() {
         let sellCurrency = this.template.querySelector('[data-id="sellCurrency"]').value;
         let buyCurrency = this.template.querySelector('[data-id="buyCurrency"]').value;
@@ -108,14 +137,14 @@ export default class CreateTrade extends LightningElement {
 
     createTrade(e) {
         e.preventDefault();
-        let sellAmount = this.template.querySelector('[data-id="sellAmount"]').value;
-        if (!sellAmount) return;
+        let sellAmount = this.template.querySelector('[data-id="sellAmount"]');
+        if (!sellAmount.value || !sellAmount.checkValidity()) return;
 
         this.showSpinner = true;
         const fields = e.detail.fields;
         fields.Rate__c = this.rate === 'X' ? 0 : this.rate;
         fields.Date_Booked__c = this.dateBooked ? new Date(this.dateBooked).toISOString() : null;
-        fields.Sell_Amount__c = sellAmount ? sellAmount : 0;
+        fields.Sell_Amount__c = sellAmount.value ? sellAmount.value : 0;
         fields.Buy_Amount__c = this.buyAmount ? this.buyAmount : 0;
         this.template.querySelector('lightning-record-edit-form').submit(fields);
     }
