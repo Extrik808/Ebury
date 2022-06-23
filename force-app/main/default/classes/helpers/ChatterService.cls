@@ -22,6 +22,7 @@ public with sharing class ChatterService {
     }
 
     public void sendPost() {
+        // Add Test.isRunningTest because ConnectApi methods are not supported in data siloed tests
         if (!Test.isRunningTest()) {
             ConnectApi.ChatterFeeds.postFeedElementBatch(Network.getNetworkId(), this.batchInputs);
         }

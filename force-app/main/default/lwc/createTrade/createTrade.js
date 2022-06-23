@@ -158,7 +158,7 @@ export default class CreateTrade extends LightningElement {
 
     handleError(event) {
         this.showSpinner = false;
-        this.showNotification(TOAST_TITLE.ERROR, 'Something went wrong. Contact your system administrator. \n' + event.detail.detail, TOAST_VARIANT.ERROR);
+        this.showNotification(TOAST_TITLE.ERROR, event.detail.detail, TOAST_VARIANT.ERROR);
     }
 
     reset() {
