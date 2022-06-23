@@ -28,8 +28,12 @@ Steps:<br/>
 <strong>REQ2</strong><br/>
 <li>We have Trade list view which show us all Trades and sorted by booking date</li><br/>
 <img src="screenshot/tradeListView.png"><br/>
-<li>We have New Trade button which open modal window. When we choose Sell Currency and Buy Currency we got latest rate. </li><br/>
-<img src="screenshot/newTrade.png"><br/>
+<li>We have New Trade button which open modal window. The create button is inactive until the fields are filled "Sell Currency", "Buy Currency" and "Sell Amount".</li><br/>
+<img src="screenshot/newTradeBlankValues.png"><br/>
+<li>When we choose Sell Currency and Buy Currency we got latest rate. </li><br/>
+<img src="screenshot/newTradeLatestRate.png"><br/>
+<li>When we fill incorrect value in "Sell Amount" field we can see validation</li><br/>
+<img src="screenshot/newTradeValidation.png"><br/>
 <li>When we fill Sell Amount, Buy Amount show us result</li><br/>
 <img src="screenshot/newTradeSellAmount.png"><br/>
 <li>When we click on create. The Trade record will created and our list view updated</li><br/>
